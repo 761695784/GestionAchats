@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planifier un Shopping</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="accueil.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Historique</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mon Planning</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Desktop Image -->
+            <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center mage">
+                <img src="Rectangle-40.png" alt="Shopping Image" class="img-fluid ">
+            </div>
+            <!-- Form Section -->
+            <div class="col-md-6 col-12 d-flex flex-column align-items-center justify-content-center">
+                <!-- Mobile Image -->
+                <div class="d-block d-md-none text-center mb-3">
+                    <img src="Group.png" alt="Astronaut" class="img-fluid mb-4">
+                </div>
+                <h3>Planifier un Shopping</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="datePicker">Choisir une date</label>
+                        <input type="date" class="form-control" id="datePicker">
+                    </div>
+                    <div class="form-group">
+                        <label for="timePicker">Heure</label>
+                        <input type="time" class="form-control" id="timePicker">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mb-3">Valider</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>
