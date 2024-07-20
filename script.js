@@ -94,3 +94,16 @@ function validate_password(password) {
 // Expose functions to the global scope
 window.validateFields = validateFields;
 window.login = login;
+window.redirectToLogin = redirectToLogin;
+window.redirectToSignup = redirectToSignup;
+
+// Redirige vers la page de connexion
+function redirectToLogin() {
+  window.location.href = 'connexion.html'; // Assurez-vous que le nom du fichier correspond à votre page de connexion
+}
+// Redirige vers la page d'inscription
+function redirectToSignup() {
+  window.location.href = 'index.html'; // Assurez-vous que le nom du fichier correspond à votre page d'inscription
+}
+
+
