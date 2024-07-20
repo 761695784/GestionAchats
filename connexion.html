@@ -10,14 +10,14 @@
 <body>
   <div class="container-fluid vh-100 d-flex align-items-center justify-content-center">
     <div class="row w-100">
-         <!-- Desktop view -->
-         <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center bg-primary text-white">
-            <div class="text-center">
-              <img src="/Group.png" alt="Astronaut" class="img-fluid mb-3">
-              <h2>Bienvenue à bord</h2>
-              <p>Juste quelques clics et nous commençons</p>
-            </div>
-          </div>
+      <!-- Desktop view -->
+      <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center bg-primary text-white">
+        <div class="text-center">
+          <img src="/Group.png" alt="Astronaut" class="img-fluid mb-3">
+          <h2>Bienvenue à bord</h2>
+          <p>Juste quelques clics et nous commençons</p>
+        </div>
+      </div>
       <!-- Mobile view -->
       <div class="col-md-6 col-12 d-flex align-items-center justify-content-center">
         <div class="w-75">
@@ -40,14 +40,14 @@
             <div class="text-right mb-3">
               <a href="#" class="text-secondary">Mot de passe oublié ?</a>
             </div>
-            <button onclick="login" type="submit" class="btn btn-primary btn-block mb-3">Connexion</button>
+            <button type="button" onclick="login()" class="btn btn-primary btn-block mb-3">Connexion</button>
             <button type="button" class="btn btn-outline-primary btn-block mb-3">
               <img src="google-icone.png" alt="Google" class="image mr-2"> Google
             </button>
             <div class="text-center">
               <p>Pas de compte?</p>
             </div>
-            <button type="button" class="btn btn-outline-primary btn-block mb-3" id="toRegisterBtn">Inscription</button>
+            <button type="button" onclick="toRegister()" class="btn btn-outline-primary btn-block mb-3">Inscription</button>
           </form>
         </div>
       </div>
@@ -56,6 +56,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="script.js"></script>
+  <script type="module" src="./script.js"></script>
 </body>
 </html>

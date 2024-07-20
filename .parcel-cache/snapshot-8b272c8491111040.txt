@@ -1,6 +1,6 @@
 18958
-86/home/malang-marna/Projet Javascript Gestion des Achats/dist/google-icone.c2965edf.png1721494410708972349 0
-79/home/malang-marna/Projet Javascript Gestion des Achats/dist/Group.0a4c1269.png1721494410652972318 0
+86/home/malang-marna/Projet Javascript Gestion des Achats/dist/google-icone.c2965edf.png1721496960777691851 0
+79/home/malang-marna/Projet Javascript Gestion des Achats/dist/Group.0a4c1269.png1721496960777691851 0
 60/home/malang-marna/Projet Javascript Gestion des Achats/dist1721494410642972312 1
 65/home/malang-marna/Projet Javascript Gestion des Achats/Group.png1721393697333997486 0
 66/home/malang-marna/Projet Javascript Gestion des Achats/ajout.html1721412727170384365 0
@@ -3377,7 +3377,7 @@
 123/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/firestore/dist/firestore/src/model/path.d.ts1721494137702823252 0
 138/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/firestore/dist/firestore/src/model/document_comparator.d.ts1721494136720822724 0
 133/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/firestore/dist/firestore/src/model/mutation_batch.d.ts1721494137531823160 0
-82/home/malang-marna/Projet Javascript Gestion des Achats/dist/index.8cfc62b9.js.map1721494410790972394 0
+82/home/malang-marna/Projet Javascript Gestion des Achats/dist/index.8cfc62b9.js.map1721496960793691870 0
 118/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/firebase/compat/storage/dist/esm/index.esm.js.map1721494136267822480 0
 142/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/firestore/dist/firestore/src/protos/firestore_bundle_proto.d.ts1721494136890822816 0
 141/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/firestore/dist/firestore/src/local/document_overlay_cache.d.ts1721494136728822728 0
@@ -4146,7 +4146,7 @@
 136/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/firestore/dist/lite/firestore/src/lite-api/timestamp.d.ts1721494138787823837 0
 112/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/firestore/dist/lite/firestore/src1721494138972823936 1
 108/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/firestore/dist/lite/firestore1721494137115822937 1
-70/home/malang-marna/Projet Javascript Gestion des Achats/connexion.html1721491458658659746 0
+70/home/malang-marna/Projet Javascript Gestion des Achats/connexion.html1721497357059067149 0
 120/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/firestore/dist/lite/index.browser.esm5.js1721494134949821771 0
 118/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/firestore/dist/lite/index.rn.esm2017.js1721494135751822202 0
 116/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/firebase/compat/app-check/dist/compat/analytics1721494137292823032 1
@@ -6257,7 +6257,7 @@
 99/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/domutils/lib/manipulation.d.ts1721494134879821733 0
 106/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/csso/node_modules/css-tree/cjs/walker1721494135314821967 1
 132/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/firestore-compat/dist/node-esm/src/api/geo_point.d.ts1721494135273821945 0
-83/home/malang-marna/Projet Javascript Gestion des Achats/dist/index.1303bb05.css.map1721494410672972329 0
+83/home/malang-marna/Projet Javascript Gestion des Achats/dist/index.1303bb05.css.map1721496960777691851 0
 136/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@parcel/optimizer-svgo/node_modules/css-tree/lib/convertor/index.js1721494135391822009 0
 133/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/auth/dist/node/src/core/user/id_token_result.test.d.ts1721494137032822892 0
 88/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/htmlnano/index.d.ts1721494135496822065 0
@@ -8997,7 +8997,7 @@
 169/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/auth/dist/web-extension-esm2017/src/core/strategies/abstract_popup_redirect_operation.d.ts1721494136060822369 0
 105/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/firebase/compat/dist/auth/index.d.ts1721494137889823353 0
 109/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/csso/node_modules/css-tree/cjs/index.cjs1721494135276821947 0
-79/home/malang-marna/Projet Javascript Gestion des Achats/dist/index.1303bb05.css1721494410670972328 0
+79/home/malang-marna/Projet Javascript Gestion des Achats/dist/index.1303bb05.css1721496960777691851 0
 135/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@parcel/optimizer-svgo/node_modules/csso/lib/replace/Percentage.js1721494135176821893 0
 99/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@types/node/child_process.d.ts1721494134827821706 0
 147/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@parcel/optimizer-svgo/node_modules/css-select/lib/pseudo-selectors/index.d.ts1721494134998821797 0
@@ -9597,7 +9597,7 @@
 153/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/firestore/dist/lite/firestore/src/local/memory_document_overlay_cache.d.ts1721494137476823131 0
 92/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/database/dist1721494136013822343 1
 85/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/braces/README.md1721494134700821637 0
-65/home/malang-marna/Projet Javascript Gestion des Achats/script.js1721494691636795368 0
+65/home/malang-marna/Projet Javascript Gestion des Achats/script.js1721497382162086236 0
 84/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/detect-libc/bin1721494134537821549 1
 143/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/firestore/dist/lite/firestore/src/lite-api/user_data_writer.d.ts1721494138956823927 0
 125/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/lmdb/dependencies/lmdb-data-v1/libraries/liblmdb/mtest.c1721494135410822019 0
@@ -9977,7 +9977,7 @@
 148/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/firestore/dist/lite/firestore/test/unit/specs/recovery_spec.test.d.ts1721494137980823402 0
 145/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@parcel/optimizer-svgo/node_modules/css-tree/lib/syntax/pseudo/common/nth.js1721494135515822075 0
 95/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/mdn-data/css/syntaxes.json1721494135053821827 0
-66/home/malang-marna/Projet Javascript Gestion des Achats/index.html1721494592676005759 0
+66/home/malang-marna/Projet Javascript Gestion des Achats/index.html1721497179601918605 0
 95/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/color-convert/package.json1721494134412821482 0
 121/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/dom-serializer/node_modules/entities/lib/decode.d.ts1721494134835821709 0
 119/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/csso/node_modules/css-tree/lib/syntax/node/Hash.js1721494135709822180 0
@@ -11255,7 +11255,7 @@
 104/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@parcel/reporter-dev-server/LICENSE1721494134420821486 0
 115/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/safevalues/dist/cjs/internals/script_impl.d.ts1721494135782822219 0
 100/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/websocket-extensions/LICENSE.md1721494134695821634 0
-78/home/malang-marna/Projet Javascript Gestion des Achats/dist/index.8cfc62b9.js1721494410783972390 0
+78/home/malang-marna/Projet Javascript Gestion des Achats/dist/index.8cfc62b9.js1721496960783691858 0
 91/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/msgpackr/node-index.js1721494134944821768 0
 146/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@parcel/optimizer-htmlnano/node_modules/css-tree/lib/syntax/scope/selector.js1721494135572822106 0
 126/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/auth/dist/esm5/src/core/auth/emulator.test.d.ts1721494136505822608 0
@@ -16622,7 +16622,7 @@
 110/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/auth/dist/node-esm/test/helpers1721494139893824432 1
 131/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/auth/dist/node-esm/test/helpers/mock_fetch.test.d.ts1721494138101823467 0
 122/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/auth/dist/node-esm/test/helpers/integration1721494139762824361 1
-71/home/malang-marna/Projet Javascript Gestion des Achats/dist/index.html1721494410767972381 0
+71/home/malang-marna/Projet Javascript Gestion des Achats/dist/index.html1721496960793691870 0
 126/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/firebase/firestore/lite/dist/esm/installations/index.d.ts1721494139897824434 0
 135/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/@firebase/auth/dist/node-esm/test/helpers/integration/helpers.d.ts1721494136995822872 0
 105/home/malang-marna/Projet Javascript Gestion des Achats/node_modules/css-tree/lib/lexer/generic-urange.js1721494135697822174 0

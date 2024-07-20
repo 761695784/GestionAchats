@@ -1,7 +1,7 @@
-// Import Firebase modules
-import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { getDatabase, ref, set } from 'firebase/database';
+// Import Firebase modules from CDN
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js';
+import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -18,13 +18,13 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 
-// Validate input fields
+// Validate input fields for registration
 function validateFields() {
   const name = document.getElementById('name').value;
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
-  if(validate_field(name) && validate_field(email) && validate_field(password) && validate_email(email) && validate_password(password)){
+  if (validate_field(name) && validate_field(email) && validate_field(password) && validate_email(email) && validate_password(password)) {
     register(name, email, password);
   } else {
     alert('Please fill all fields correctly');
@@ -53,6 +53,30 @@ function register(name, email, password) {
     });
 }
 
+// Login function
+function login() {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  if (validate_field(email) && validate_field(password) && validate_email(email) && validate_password(password)) {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        alert('Login successful!');
+        // Redirect to the main page or dashboard
+        // window.location.href = 'main.html';
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+  } else {
+    alert('Please fill all fields correctly');
+  }
+}
+
 // Utility functions to validate fields
 function validate_field(field) {
   return field && field.trim() !== '';
@@ -67,5 +91,6 @@ function validate_password(password) {
   return password.length >= 6;  // Example password validation rule
 }
 
-// Expose validateFields to the global scope
+// Expose functions to the global scope
 window.validateFields = validateFields;
+window.login = login;
