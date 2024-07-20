@@ -28,7 +28,7 @@
           </div>
           <!-- Desktop text -->
           <h3 class="text-center mb-4 d-none d-md-block">Bienvenue</h3>
-          <form >
+          <form id="signinForm">
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" class="form-control" id="email" placeholder="Email">
@@ -40,7 +40,7 @@
             <div class="text-right mb-3">
               <a href="#" class="text-secondary">Mot de passe oublié ?</a>
             </div>
-            <button type="submit" class="btn btn-primary btn-block mb-3">Connexion</button>
+            <button onclick="login" type="submit" class="btn btn-primary btn-block mb-3">Connexion</button>
             <button type="button" class="btn btn-outline-primary btn-block mb-3">
               <img src="google-icone.png" alt="Google" class="image mr-2"> Google
             </button>
@@ -56,10 +56,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script>
-    document.getElementById('toRegisterBtn').addEventListener('click', function() {
-      window.location.href = 'index.html';
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

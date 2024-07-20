@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/index.1303bb05.css">
+</head>
+<body>
+  <div class="container-fluid vh-100 d-flex align-items-center justify-content-center">
+    <div class="row w-100">
+      <!-- Desktop view -->
+      <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center bg-primary text-white">
+        <div class="text-center">
+          <img src="/Group.0a4c1269.png" alt="Astronaut" class="img-fluid mb-3">
+          <h2>Bienvenue à bord</h2>
+          <p>Juste quelques clics et nous commençons</p>
+        </div>
+      </div>
+      <!-- Mobile view -->
+      <div class="col-md-6 col-12 d-flex align-items-center justify-content-center">
+        <div class="w-75">
+          <!-- Mobile image and text -->
+          <div class="text-center d-block d-md-none mb-3">
+            <img src="/Group.0a4c1269.png" alt="Astronaut" class="img-fluid mb-4">
+            <h3>Bienvenue</h3>
+          </div>
+          <!-- Desktop text -->
+          <h3 class="text-center mb-4 d-none d-md-block">Bienvenue</h3>
+          <form id="signupForm">
+            <div class="form-group">
+              <label for="name">Nom complet</label>
+              <input type="text" class="form-control" id="name" placeholder="Nom complet">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <div class="text-right mb-3">
+              <a href="#" class="text-secondary">Mot de passe oublié ?</a>
+            </div>
+            <button type="button" onclick="validateFields()" class="btn btn-primary btn-block mb-3">Inscription</button>
+            <button type="button" class="btn btn-outline-primary btn-block mb-3 googleLogin">
+              <img src="/google-icone.c2965edf.png" alt="Google" class="image mr-2"> Google
+            </button>
+            <div class="text-center">
+              <p>Pas de compte?</p>
+            </div>
+            <button type="button" onclick="login()" class="btn btn-outline-primary btn-block mb-3" id="toLoginBtn">Connexion</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ 
+  <script src="/index.8cfc62b9.js" defer=""></script>
+</body>
+</html>

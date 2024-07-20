@@ -28,7 +28,7 @@
           </div>
           <!-- Desktop text -->
           <h3 class="text-center mb-4 d-none d-md-block">Bienvenue</h3>
-          <form >
+          <form id="signupForm">
             <div class="form-group">
               <label for="name">Nom complet</label>
               <input type="text" class="form-control" id="name" placeholder="Nom complet">
@@ -44,14 +44,14 @@
             <div class="text-right mb-3">
               <a href="#" class="text-secondary">Mot de passe oublié ?</a>
             </div>
-            <button type="submit" class="btn btn-primary btn-block mb-3">Inscription</button>
-            <button type="button" class="btn btn-outline-primary btn-block mb-3">
+            <button type="button" onclick="validateFields()" class="btn btn-primary btn-block mb-3">Inscription</button>
+            <button type="button" class="btn btn-outline-primary btn-block mb-3 googleLogin">
               <img src="google-icone.png" alt="Google" class="image mr-2"> Google
             </button>
             <div class="text-center">
               <p>Pas de compte?</p>
             </div>
-            <button type="button" class="btn btn-outline-primary btn-block mb-3" id="toLoginBtn">Connexion</button>
+            <button type="button" onclick="login()" class="btn btn-outline-primary btn-block mb-3" id="toLoginBtn">Connexion</button>
           </form>
         </div>
       </div>
@@ -60,10 +60,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script>
-    document.getElementById('toLoginBtn').addEventListener('click', function() {
-      window.location.href = 'connexion.html';
-    });
-  </script>
+ 
+  <script type="module" src="./script.js"></script>
 </body>
 </html>
