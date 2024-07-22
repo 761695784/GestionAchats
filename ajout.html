@@ -6,12 +6,70 @@
     <title>Liste de Produits</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="ajout.css">
+    <script type="module" src="script.js" defer></script> <!-- Include your Firebase script here -->
+    <style>
+        .product-card {
+            border: 1px solid #ddd;
+            transition: border-color 0.3s;
+        }
+        .product-card.purchased {
+            border-color: green;
+        }
+        .card-body {
+            position: relative;
+        }
+        .btn-group {
+            position: relative;
+            right: 0;
+            top: 0;
+            margin-left: 10rem;
+            margin-top: 1rem;
+        }
+        /* Styles pour le sidebar */
+.sidebar {
+    height: 100%;
+    width: 250px; /* Largeur du sidebar */
+    position: fixed;
+    top: 0;
+    left: -250px; /* Caché par défaut */
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.3s;
+    z-index: 1000;
+    padding-top: 60px;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+.sidebar .close-btn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.open-sidebar {
+    left: 0; /* Affiche le sidebar */
+}
+
+    </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">Liste de Produits</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+   <!-- Menu Burger -->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -26,81 +84,54 @@
                     <a class="nav-link" href="#">Mon Planning</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
+                    <!-- <a class="nav-link" href="#"><i class="fas fa-user"></i></a> -->
                 </li>
             </ul>
         </div>
     </nav>
-
-    <!-- Sidebar for Mobile -->
-    <div id="sidebar" class="sidebar d-lg-none">
-        <div class="sidebar-content">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Historique</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Mon Planning</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-user"></i> Profil</a>
-                </li>
-            </ul>
-        </div>
+   
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
+        <a href="#">Accueil</a>
+        <a href="#">Historique</a>
+        <a href="#">Mon Planning</a>
+        <a href="javascript:void(0)" id="logout-link">Déconnexion</a>
+        <!-- <a href="#"><i class="fas fa-user"></i></a> -->
     </div>
 
     <div class="container-fluid">
         <div class="row">
             <!-- Form Section -->
             <div class="col-md-6 col-12 d-flex flex-column align-items-center justify-content-center">
-                <h3>Liste du 20/10/2024</h3>
-                <form>
+                <h3 id="plannedDateTime">Liste du </h3>
+                <form id="productForm">
                     <div class="form-group">
                         <label for="productName">Nom</label>
-                        <input type="text" class="form-control" id="productName" placeholder="Nom du produit">
+                        <input type="text" class="form-control" id="productName" placeholder="Nom du produit" required>
                     </div>
                     <div class="form-group">
                         <label for="quantity">Quantité</label>
-                        <input type="number" class="form-control" id="quantity" placeholder="Quantité Souhaitée">
+                        <input type="number" class="form-control" id="quantity" placeholder="Quantité Souhaitée" required>
                     </div>
                     <div class="form-group">
                         <label for="unitPrice">Prix Unitaire</label>
-                        <input type="number" class="form-control" id="unitPrice" placeholder="Prix de l'unité">
+                        <input type="number" class="form-control" id="unitPrice" placeholder="Prix de l'unité" required>
                     </div>
                     <div class="form-group">
                         <label for="total">Totale :</label>
                         <input type="text" class="form-control" id="total" placeholder=" en FCFA" disabled>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mb-3">Ajouter</button>
-                   
                 </form>
             </div>
             <!-- Desktop Image -->
             <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center">
-                <img src="path/to/your/image.jpg" alt="Shopping Image" class="img-fluid">
+                <img src="Rectangle-40.png" alt="Shopping Image" class="img-fluid">
             </div>
-        </div>
-        
-        <div class="row mt-4">
-            <div class="col-12 d-flex flex-wrap justify-content-center">
-                <!-- Product Cards -->
-                <div class="product-card card m-2">
-                    <div class="card-body">
-                        <p>Superçent Noir numero 32</p>
-                        <p>Prix Unitaire = 4000 f</p>
-                        <p>quantité = 2</p>
-                        <p>Total = 8000 FCFA</p>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-success btn-sm"><i class="fas fa-check"></i>terminée</button>
-                            <button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i>modifier</button>
-                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash">supprimer</i></button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Repeat for other product cards -->
+            <!-- Product Cards Section -->
+            <div class="col-12 d-flex flex-wrap justify-content-center" id="productCards">
+                <!-- Cards will be dynamically added here -->
             </div>
         </div>
     </div>
@@ -109,8 +140,194 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js';
+        import { getDatabase, ref, set, push, onValue, remove, get } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js';
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBHPaYRAkOE1VTo9hv3tkseUFnGfJkvtUo",
+            authDomain: "gestionachats-1112.firebaseapp.com",
+            projectId: "gestionachats-1112",
+            storageBucket: "gestionachats-1112.appspot.com",
+            messagingSenderId: "1014952416832",
+            appId: "1:1014952416832:web:33fdda900d4ff03e9db1a5"
+        };
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Références aux éléments du DOM
+        const productForm = document.getElementById('productForm');
+        const productNameInput = document.getElementById('productName');
+        const quantityInput = document.getElementById('quantity');
+        const unitPriceInput = document.getElementById('unitPrice');
+        const totalInput = document.getElementById('total');
+        const productCards = document.getElementById('productCards');
+
+        // Fonction pour calculer le total
+        const calculateTotal = () => {
+            const quantity = parseFloat(quantityInput.value) || 0;
+            const unitPrice = parseFloat(unitPriceInput.value) || 0;
+            totalInput.value = quantity * unitPrice;
+        };
+
+        // Fonction pour sauvegarder le produit dans Firebase
+        const saveProductToFirebase = (product) => {
+            const productsRef = ref(database, 'products'); // Référence à la collection des produits
+            const newProductRef = push(productsRef); // Crée une nouvelle entrée
+            set(newProductRef, product)
+                .then(() => {
+                    alert("Produit ajouté avec succès !");
+                    renderProductCards();
+                })
+                .catch((error) => {
+                    alert("Erreur lors de l'ajout du produit : " + error.message);
+                });
+        };
+
+        // Fonction pour afficher les produits
+        const renderProductCards = () => {
+            const productsRef = ref(database, 'products');
+            get(productsRef)
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const products = snapshot.val();
+                        productCards.innerHTML = '';
+                        Object.keys(products).forEach(key => {
+                            const product = products[key];
+                            const productCard = document.createElement('div');
+                            productCard.className = 'product-card card m-2';
+                            productCard.dataset.key = key; // Stocke la clé pour modification et suppression
+                            productCard.innerHTML = `
+                                <div class="card-body">
+                                    <p> <strong>${product.name} </strong></p>
+                                    <p>Prix Unitaire = ${product.unitPrice} FCFA</p>
+                                    <p>Quantité = ${product.quantity}</p>
+                                    <p>Total = ${product.total} FCFA</p>
+                                    <p> <input type="checkbox" class="purchase-checkbox"> Marquer comme deja acheté</p>
+
+                                    <div class="btn-group">
+                                        <button class="btn btn-warning btn-sm btn-edit"><i class="fas fa-edit"></i> Modifier</button>
+                                        <button class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash"></i> Supprimer</button>
+                                    </div>
+                                </div>
+                            `;
+                            productCard.querySelector('.purchase-checkbox').addEventListener('change', function() {
+                                productCard.classList.toggle('purchased', this.checked);
+                            });
+                            productCard.querySelector('.btn-edit').addEventListener('click', function() {
+                                editProduct(key);
+                            });
+                            productCard.querySelector('.btn-delete').addEventListener('click', function() {
+                                deleteProduct(key);
+                            });
+                            productCards.appendChild(productCard);
+                        });
+                    }
+                });
+        };
+
+        // Fonction pour éditer un produit
+        const editProduct = (key) => {
+            const productsRef = ref(database, `products/${key}`);
+            get(productsRef)
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const product = snapshot.val();
+                        productNameInput.value = product.name;
+                        quantityInput.value = product.quantity;
+                        unitPriceInput.value = product.unitPrice;
+                        totalInput.value = product.total;
+                        productForm.addEventListener('submit', function(event) {
+                            event.preventDefault();
+                            updateProduct(key);
+                        }, { once: true });
+                    }
+                });
+        };
+
+        // Fonction pour mettre à jour un produit
+        const updateProduct = (key) => {
+            const product = {
+                name: productNameInput.value.trim(),
+                quantity: parseFloat(quantityInput.value),
+                unitPrice: parseFloat(unitPriceInput.value),
+                total: parseFloat(totalInput.value)
+            };
+            const productRef = ref(database, `products/${key}`);
+            set(productRef, product)
+                .then(() => {
+                    alert("Produit mis à jour avec succès !");
+                    productForm.reset();
+                    totalInput.value = '';
+                    renderProductCards();
+                })
+                .catch((error) => {
+                    alert("Erreur lors de la mise à jour du produit : " + error.message);
+                });
+        };
+
+        // Fonction pour supprimer un produit
+        const deleteProduct = (key) => {
+            const productRef = ref(database, `products/${key}`);
+            remove(productRef)
+                .then(() => {
+                    alert("Produit supprimé avec succès !");
+                    renderProductCards();
+                })
+                .catch((error) => {
+                    alert("Erreur lors de la suppression du produit : " + error.message);
+                });
+        };
+
+        // Événement pour calculer le total à chaque entrée dans le formulaire
+        productForm.addEventListener('input', calculateTotal);
+
+        // Événement pour soumettre le formulaire
+        productForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const productName = productNameInput.value.trim();
+            const quantity = parseFloat(quantityInput.value);
+            const unitPrice = parseFloat(unitPriceInput.value);
+            const total = parseFloat(totalInput.value);
+
+            if (productName && quantity && unitPrice && total) {
+                const product = {
+                    name: productName,
+                    quantity: quantity,
+                    unitPrice: unitPrice,
+                    total: total
+                };
+                saveProductToFirebase(product);
+                productForm.reset();
+                totalInput.value = '';
+            } else {
+                alert('Veuillez remplir tous les champs.');
+            }
+        });
+
+        // Initialiser l'affichage des produits au chargement de la page
+        document.addEventListener('DOMContentLoaded', renderProductCards);
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const plannedDate = localStorage.getItem('plannedDate');
+            const plannedDateTimeElement = document.getElementById('plannedDateTime');
+
+            if (plannedDate) {
+                plannedDateTimeElement.textContent += `${plannedDate}`;
+            } else {
+                plannedDateTimeElement.textContent += 'non définie';
+            }
+        });
+                // Sidebar Toggle
+                function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("open-sidebar");
+        }
         
+        document.querySelector('.navbar-toggler').addEventListener('click', function() {
+            toggleSidebar();
+        });  
     </script>
 </body>
 </html>

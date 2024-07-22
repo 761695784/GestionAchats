@@ -52,15 +52,15 @@
                     <img src="Group.png" alt="Astronaut" class="img-fluid mb-4">
                 </div>
                 <h3>Planifier un Shopping</h3>
-                <form>
+                <form id="planningForm">
                     <div class="form-group">
                         <label for="datePicker">Choisir une date</label>
                         <input type="date" class="form-control" id="datePicker">
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="timePicker">Heure</label>
                         <input type="time" class="form-control" id="timePicker">
-                    </div>
+                    </div> -->
                     <button type="submit" class="btn btn-primary btn-block mb-3">Valider</button>
                 </form>
             </div>
@@ -72,13 +72,39 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
      <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+    const planningForm = document.getElementById('planningForm');
+
+    planningForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Empêche le rechargement de la page
+
+        const date = document.getElementById('datePicker').value;
+        // const time = document.getElementById('timePicker').value;
+
+        if (date )
+        // && time {
+            // Enregistrer les informations dans localStorage ou dans la base de données Firebase
+            localStorage.setItem('plannedDate', date);
+            // localStorage.setItem('plannedTime', time);
+
+            // Rediriger vers la page ajout.html
+            window.location.href = 'ajout.html';
+        // } else {
+        //     alert('Veuillez remplir la date et l\'heure.');
+        // }
+    });
+});
+
+        
+        // Sidebar Toggle
         function toggleSidebar() {
             document.getElementById("sidebar").classList.toggle("open-sidebar");
         }
         
         document.querySelector('.navbar-toggler').addEventListener('click', function() {
             toggleSidebar();
-        });   
+        });  
+
     </script>
     <script type="module" src="script.js"></script>
 </body>

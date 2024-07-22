@@ -1,7 +1,7 @@
 // Import Firebase modules from CDN
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js';
-import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js';
+import { getDatabase, ref, set, push, onValue, remove, get } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -117,3 +117,4 @@ function logout() {
 }
 // Add event listener for logout
 document.getElementById('logout-link').addEventListener('click', logout);
+
