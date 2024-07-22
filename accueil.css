@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: Arial, sans-serif;
     background-color: white;
 }
@@ -100,4 +100,47 @@ h3 {
     p {
         font-size: 0.875rem;
     }
-}
+} */
+        /* Add some basic styles for the sidebar */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #ffffff;
+            padding-top: 60px;
+            transition: 0.3s;
+            z-index: 1000;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bolder;
+            color: #3949AB;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            color: #000000;
+            background-color: #f1f1f1;
+        }
+        .sidebar .close-btn {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            font-size: 36px;
+        }
+        .open-sidebar {
+            left: 0;
+            
+        }
+        
+        /* Hide sidebar on larger screens */
+        @media (min-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+        
+        }

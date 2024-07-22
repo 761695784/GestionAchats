@@ -1,6 +1,6 @@
 // Import Firebase modules from CDN
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js';
 import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js';
 
 // Your web app's Firebase configuration
@@ -65,7 +65,7 @@ function login() {
         const user = userCredential.user;
         alert('Login successful!');
         // Redirect to the main page or dashboard
-        // window.location.href = 'main.html';
+         window.location.href = 'accueil.html';
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -96,7 +96,7 @@ window.validateFields = validateFields;
 window.login = login;
 window.redirectToLogin = redirectToLogin;
 window.redirectToSignup = redirectToSignup;
-
+window.logout = logout;
 // Redirige vers la page de connexion
 function redirectToLogin() {
   window.location.href = 'connexion.html'; // Assurez-vous que le nom du fichier correspond à votre page de connexion
@@ -106,4 +106,14 @@ function redirectToSignup() {
   window.location.href = 'index.html'; // Assurez-vous que le nom du fichier correspond à votre page d'inscription
 }
 
-
+// Logout function
+function logout() {
+  signOut(auth).then(() => {
+    alert('Logout successful!');
+    window.location.href = 'connexion.html'; // Redirect to the login page
+  }).catch((error) => {
+    alert(error.message);
+  });
+}
+// Add event listener for logout
+document.getElementById('logout-link').addEventListener('click', logout);
