@@ -6,13 +6,7 @@
     <title>Mes Plannings</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script type="module" src="script.js" defer></script>
-    <style>
-        .sidebar { height: 100%; width: 250px; position: fixed; top: 0; left: -250px; background-color: #111; overflow-x: hidden; transition: 0.3s; z-index: 1000; padding-top: 60px; }
-        .sidebar a { padding: 8px 8px 8px 32px; text-decoration: none; font-size: 25px; color: #818181; display: block; transition: 0.3s; }
-        .sidebar a:hover { color: #f1f1f1; }
-        .sidebar .close-btn { position: absolute; top: 0; right: 25px; font-size: 36px; margin-left: 50px; }
-        .open-sidebar { left: 0; }
-    </style>
+    <link rel="stylesheet" href="accueil.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -21,9 +15,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a class="nav-link" href="#">Accueil</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Historique</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Mon Planning</a></li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Historique</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mes Planning</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -32,10 +35,10 @@
         <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
         <a href="#">Accueil</a>
         <a href="#">Historique</a>
-        <a href="#">Mon Planning</a>
-        <a href="javascript:void(0)" id="logout-link">Déconnexion</a>
+        <a href="javascript:void(0)" id="monplanning">Mes Planning</a>
+        <a href="javascript:void(0)" id="logout-link">Deconnexion</a>
+        <a href="#"><i class="fas fa-user"></i></a>
     </div>
-
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
@@ -93,12 +96,24 @@
             });
         };
 
-        const viewPlanning = (date) => {
+        // const viewPlanning = (date) => {
+        //     localStorage.setItem('plannedDate', date);
+        //     window.location.href = 'Produit.html';
+        // };
+        window.viewPlanning = (date) => {
+            console.log("viewPlanning called with date:", date);
             localStorage.setItem('plannedDate', date);
             window.location.href = 'Produit.html';
         };
-
         fetchPlanningsFromFirebase();
+               // Sidebar Toggle
+               function toggleSidebar() {
+              document.getElementById("sidebar").classList.toggle("open-sidebar");
+              }
+        
+            document.querySelector('.navbar-toggler').addEventListener('click', function() {
+            toggleSidebar();
+             });
     </script>
 </body>
 </html>

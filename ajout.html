@@ -6,42 +6,50 @@
     <title>Liste de Produits</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="ajout.css">
+    <link rel="stylesheet" href="accueil.css">
     <script type="module" src="script.js" defer></script>
+
     <style>
         .product-card { border: 1px solid #ddd; transition: border-color 0.3s; }
         .product-card.purchased { border-color: green; }
         .card-body { position: relative; }
-        /* .btn-group { position: relative; right: 0; top: 0; margin-left: 10rem; margin-top: 1rem; } */
-        .sidebar { height: 100%; width: 250px; position: fixed; top: 0; left: -250px; background-color: #111; overflow-x: hidden; transition: 0.3s; z-index: 1000; padding-top: 60px; }
-        .sidebar a { padding: 8px 8px 8px 32px; text-decoration: none; font-size: 25px; color: #818181; display: block; transition: 0.3s; }
-        .sidebar a:hover { color: #f1f1f1; }
-        .sidebar .close-btn { position: absolute; top: 0; right: 25px; font-size: 36px; margin-left: 50px; }
-        .open-sidebar { left: 0; }
+
     </style>
 </head>
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a class="nav-link" href="#">Accueil</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Historique</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Mon Planning</a></li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Historique</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mes Planning</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
+                </li>
             </ul>
         </div>
     </nav>
-   
+
     <div class="sidebar" id="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
         <a href="#">Accueil</a>
         <a href="#">Historique</a>
-        <a href="#">Mon Planning</a>
-        <a href="javascript:void(0)" id="logout-link">Déconnexion</a>
+        <a href="/mesplanning.html" id="monplanning">Mes Planning</a>
+        <a href="javascript:void(0)" id="logout-link">Deconnexion</a>
+        <a href="#"><i class="fas fa-user"></i></a>
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-6 col-12 d-flex flex-column align-items-center justify-content-center">
                 <h3 id="plannedDateTime">Liste du </h3>
@@ -199,6 +207,14 @@
                     }
                 });
         };
+        // Sidebar Toggle
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("open-sidebar");
+        }
+        
+        document.querySelector('.navbar-toggler').addEventListener('click', function() {
+            toggleSidebar();
+        }); 
 
         const deleteProduct = (key) => {
             const productRef = ref(database, `products/${plannedDate}/${key}`);
@@ -214,7 +230,18 @@
 
         document.getElementById('plannedDateTime').textContent = `Liste du ${plannedDate}`;
 
+
         renderProductCards();
+                    // Burger menu toggle
+                    window.toggleSidebar = () => {
+            console.log("toggleSidebar called");
+            document.getElementById('sidebar').classList.toggle('open-sidebar');
+        };
+          
+        
+        document.querySelector('.navbar-toggler').addEventListener('click', function() {
+            toggleSidebar();
+        });  
     </script>
 </body>
 </html>
