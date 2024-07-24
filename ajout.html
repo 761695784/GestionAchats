@@ -6,103 +6,43 @@
     <title>Liste de Produits</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="ajout.css">
-    <script type="module" src="script.js" defer></script> <!-- Include your Firebase script here -->
+    <script type="module" src="script.js" defer></script>
     <style>
-        .product-card {
-            border: 1px solid #ddd;
-            transition: border-color 0.3s;
-        }
-        .product-card.purchased {
-            border-color: green;
-        }
-        .card-body {
-            position: relative;
-        }
-        .btn-group {
-            position: relative;
-            right: 0;
-            top: 0;
-            margin-left: 10rem;
-            margin-top: 1rem;
-        }
-        /* Styles pour le sidebar */
-.sidebar {
-    height: 100%;
-    width: 250px; /* Largeur du sidebar */
-    position: fixed;
-    top: 0;
-    left: -250px; /* Caché par défaut */
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.3s;
-    z-index: 1000;
-    padding-top: 60px;
-}
-
-.sidebar a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-}
-
-.sidebar a:hover {
-    color: #f1f1f1;
-}
-
-.sidebar .close-btn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
-.open-sidebar {
-    left: 0; /* Affiche le sidebar */
-}
-
+        .product-card { border: 1px solid #ddd; transition: border-color 0.3s; }
+        .product-card.purchased { border-color: green; }
+        .card-body { position: relative; }
+        .btn-group { position: relative; right: 0; top: 0; margin-left: 10rem; margin-top: 1rem; }
+        .sidebar { height: 100%; width: 250px; position: fixed; top: 0; left: -250px; background-color: #111; overflow-x: hidden; transition: 0.3s; z-index: 1000; padding-top: 60px; }
+        .sidebar a { padding: 8px 8px 8px 32px; text-decoration: none; font-size: 25px; color: #818181; display: block; transition: 0.3s; }
+        .sidebar a:hover { color: #f1f1f1; }
+        .sidebar .close-btn { position: absolute; top: 0; right: 25px; font-size: 36px; margin-left: 50px; }
+        .open-sidebar { left: 0; }
     </style>
 </head>
 <body>
-   <!-- Menu Burger -->
-   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Historique</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Mon Planning</a>
-                </li>
-                <li class="nav-item">
-                    <!-- <a class="nav-link" href="#"><i class="fas fa-user"></i></a> -->
-                </li>
+                <li class="nav-item active"><a class="nav-link" href="#">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Historique</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Mon Planning</a></li>
             </ul>
         </div>
     </nav>
    
-    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
         <a href="#">Accueil</a>
         <a href="#">Historique</a>
         <a href="#">Mon Planning</a>
         <a href="javascript:void(0)" id="logout-link">Déconnexion</a>
-        <!-- <a href="#"><i class="fas fa-user"></i></a> -->
     </div>
 
     <div class="container-fluid">
         <div class="row">
-            <!-- Form Section -->
             <div class="col-md-6 col-12 d-flex flex-column align-items-center justify-content-center">
                 <h3 id="plannedDateTime">Liste du </h3>
                 <form id="productForm">
@@ -125,14 +65,10 @@
                     <button type="submit" class="btn btn-primary btn-block mb-3">Ajouter</button>
                 </form>
             </div>
-            <!-- Desktop Image -->
             <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center">
                 <img src="Rectangle-40.png" alt="Shopping Image" class="img-fluid">
             </div>
-            <!-- Product Cards Section -->
-            <div class="col-12 d-flex flex-wrap justify-content-center" id="productCards">
-                <!-- Cards will be dynamically added here -->
-            </div>
+            <div class="col-12 d-flex flex-wrap justify-content-center" id="productCards"></div>
         </div>
     </div>
 
@@ -144,7 +80,6 @@
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js';
         import { getDatabase, ref, set, push, onValue, remove, get } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js';
 
-        // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBHPaYRAkOE1VTo9hv3tkseUFnGfJkvtUo",
             authDomain: "gestionachats-1112.firebaseapp.com",
@@ -153,28 +88,27 @@
             messagingSenderId: "1014952416832",
             appId: "1:1014952416832:web:33fdda900d4ff03e9db1a5"
         };
+
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
 
-        // Références aux éléments du DOM
         const productForm = document.getElementById('productForm');
         const productNameInput = document.getElementById('productName');
         const quantityInput = document.getElementById('quantity');
         const unitPriceInput = document.getElementById('unitPrice');
         const totalInput = document.getElementById('total');
         const productCards = document.getElementById('productCards');
+        const plannedDate = localStorage.getItem('plannedDate');
 
-        // Fonction pour calculer le total
         const calculateTotal = () => {
             const quantity = parseFloat(quantityInput.value) || 0;
             const unitPrice = parseFloat(unitPriceInput.value) || 0;
             totalInput.value = quantity * unitPrice;
         };
 
-        // Fonction pour sauvegarder le produit dans Firebase
         const saveProductToFirebase = (product) => {
-            const productsRef = ref(database, 'products'); // Référence à la collection des produits
-            const newProductRef = push(productsRef); // Crée une nouvelle entrée
+            const productsRef = ref(database, `products/${product.date}`);
+            const newProductRef = push(productsRef);
             set(newProductRef, product)
                 .then(() => {
                     alert("Produit ajouté avec succès !");
@@ -185,9 +119,8 @@
                 });
         };
 
-        // Fonction pour afficher les produits
         const renderProductCards = () => {
-            const productsRef = ref(database, 'products');
+            const productsRef = ref(database, `products/${plannedDate}`);
             get(productsRef)
                 .then((snapshot) => {
                     if (snapshot.exists()) {
@@ -197,15 +130,15 @@
                             const product = products[key];
                             const productCard = document.createElement('div');
                             productCard.className = 'product-card card m-2';
-                            productCard.dataset.key = key; // Stocke la clé pour modification et suppression
+                            productCard.dataset.key = key;
                             productCard.innerHTML = `
                                 <div class="card-body">
-                                    <p> <strong>${product.name} </strong></p>
+                                    <p><strong>${product.name}</strong></p>
                                     <p>Prix Unitaire = ${product.unitPrice} FCFA</p>
                                     <p>Quantité = ${product.quantity}</p>
                                     <p>Total = ${product.total} FCFA</p>
-                                    <p> <input type="checkbox" class="purchase-checkbox"> Marquer comme deja acheté</p>
-
+                                    <p>Date = ${product.date}</p>
+                                    <p><input type="checkbox" class="purchase-checkbox"> Marquer comme déjà acheté</p>
                                     <div class="btn-group">
                                         <button class="btn btn-warning btn-sm btn-edit"><i class="fas fa-edit"></i> Modifier</button>
                                         <button class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash"></i> Supprimer</button>
@@ -227,9 +160,34 @@
                 });
         };
 
-        // Fonction pour éditer un produit
+        productForm.addEventListener('input', calculateTotal);
+
+        productForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const productName = productNameInput.value;
+            const quantity = parseFloat(quantityInput.value);
+            const unitPrice = parseFloat(unitPriceInput.value);
+            const total = parseFloat(totalInput.value);
+
+            const product = {
+                name: productName,
+                quantity,
+                unitPrice,
+                total,
+                date: plannedDate
+            };
+
+            saveProductToFirebase(product);
+
+            productNameInput.value = '';
+            quantityInput.value = '';
+            unitPriceInput.value = '';
+            totalInput.value = '';
+        });
+
         const editProduct = (key) => {
-            const productsRef = ref(database, `products/${key}`);
+            const productsRef = ref(database, `products/${plannedDate}/${key}`);
             get(productsRef)
                 .then((snapshot) => {
                     if (snapshot.exists()) {
@@ -237,39 +195,13 @@
                         productNameInput.value = product.name;
                         quantityInput.value = product.quantity;
                         unitPriceInput.value = product.unitPrice;
-                        totalInput.value = product.total;
-                        productForm.addEventListener('submit', function(event) {
-                            event.preventDefault();
-                            updateProduct(key);
-                        }, { once: true });
+                        calculateTotal();
                     }
                 });
         };
 
-        // Fonction pour mettre à jour un produit
-        const updateProduct = (key) => {
-            const product = {
-                name: productNameInput.value.trim(),
-                quantity: parseFloat(quantityInput.value),
-                unitPrice: parseFloat(unitPriceInput.value),
-                total: parseFloat(totalInput.value)
-            };
-            const productRef = ref(database, `products/${key}`);
-            set(productRef, product)
-                .then(() => {
-                    alert("Produit mis à jour avec succès !");
-                    productForm.reset();
-                    totalInput.value = '';
-                    renderProductCards();
-                })
-                .catch((error) => {
-                    alert("Erreur lors de la mise à jour du produit : " + error.message);
-                });
-        };
-
-        // Fonction pour supprimer un produit
         const deleteProduct = (key) => {
-            const productRef = ref(database, `products/${key}`);
+            const productRef = ref(database, `products/${plannedDate}/${key}`);
             remove(productRef)
                 .then(() => {
                     alert("Produit supprimé avec succès !");
@@ -280,54 +212,9 @@
                 });
         };
 
-        // Événement pour calculer le total à chaque entrée dans le formulaire
-        productForm.addEventListener('input', calculateTotal);
+        document.getElementById('plannedDateTime').textContent = `Liste du ${plannedDate}`;
 
-        // Événement pour soumettre le formulaire
-        productForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const productName = productNameInput.value.trim();
-            const quantity = parseFloat(quantityInput.value);
-            const unitPrice = parseFloat(unitPriceInput.value);
-            const total = parseFloat(totalInput.value);
-
-            if (productName && quantity && unitPrice && total) {
-                const product = {
-                    name: productName,
-                    quantity: quantity,
-                    unitPrice: unitPrice,
-                    total: total
-                };
-                saveProductToFirebase(product);
-                productForm.reset();
-                totalInput.value = '';
-            } else {
-                alert('Veuillez remplir tous les champs.');
-            }
-        });
-
-        // Initialiser l'affichage des produits au chargement de la page
-        document.addEventListener('DOMContentLoaded', renderProductCards);
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const plannedDate = localStorage.getItem('plannedDate');
-            const plannedDateTimeElement = document.getElementById('plannedDateTime');
-
-            if (plannedDate) {
-                plannedDateTimeElement.textContent += `${plannedDate}`;
-            } else {
-                plannedDateTimeElement.textContent += 'non définie';
-            }
-        });
-                // Sidebar Toggle
-                function toggleSidebar() {
-            document.getElementById("sidebar").classList.toggle("open-sidebar");
-        }
-        
-        document.querySelector('.navbar-toggler').addEventListener('click', function() {
-            toggleSidebar();
-        });  
+        renderProductCards();
     </script>
 </body>
 </html>

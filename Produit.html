@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste de Produits</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .product-card { border: 1px solid #ddd; transition: border-color 0.3s; }
+        .product-card.purchased { border-color: green; }
+        .card-body { position: relative; }
+        .btn-group { position: absolute; right: 10px; top: 10px; }
+        .sidebar { height: 100%; width: 250px; position: fixed; top: 0; left: -250px; background-color: #111; overflow-x: hidden; transition: 0.3s; z-index: 1000; padding-top: 60px; }
+        .sidebar a { padding: 8px 8px 8px 32px; text-decoration: none; font-size: 25px; color: #818181; display: block; transition: 0.3s; }
+        .sidebar a:hover { color: #f1f1f1; }
+        .sidebar .close-btn { position: absolute; top: 0; right: 25px; font-size: 36px; margin-left: 50px; }
+        .open-sidebar { left: 0; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a class="nav-link" href="#">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Historique</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Mon Planning</a></li>
+            </ul>
+        </div>
+    </nav>
+   
+    <div class="sidebar" id="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
+        <a href="#">Accueil</a>
+        <a href="#">Historique</a>
+        <a href="#">Mon Planning</a>
+        <a href="javascript:void(0)" id="logout-link">Déconnexion</a>
+    </div>
+
+    <div class="container mt-5">
+        <h3>Liste des Produits Planifiés</h3>
+        <div class="row" id="productCards"></div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js';
+        import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBHPaYRAkOE1VTo9hv3tkseUFnGfJkvtUo",
+            authDomain: "gestionachats-1112.firebaseapp.com",
+            projectId: "gestionachats-1112",
+            storageBucket: "gestionachats-1112.appspot.com",
+            messagingSenderId: "1014952416832",
+            appId: "1:1014952416832:web:33fdda900d4ff03e9db1a5"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        const productCards = document.getElementById('productCards');
+        const plannedDate = localStorage.getItem('plannedDate');
+
+        const renderProductCards = () => {
+            const productsRef = ref(database, `products/${plannedDate}`);
+            onValue(productsRef, (snapshot) => {
+                const products = snapshot.val();
+                productCards.innerHTML = '';
+                if (products) {
+                    Object.keys(products).forEach(key => {
+                        const product = products[key];
+                        const productCard = document.createElement('div');
+                        productCard.className = 'product-card card col-md-3 m-3';
+                        productCard.dataset.key = key;
+                        productCard.innerHTML = `
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">Prix Unitaire: ${product.unitPrice} FCFA</p>
+                                <p class="card-text">Quantité: ${product.quantity}</p>
+                                <p class="card-text">Total: ${product.total} FCFA</p>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary btn-sm" onclick="viewProductDetails('${key}')">Voir</button>
+                                </div>
+                            </div>
+                        `;
+                        productCards.appendChild(productCard);
+                    });
+                }
+            });
+        };
+
+        const viewProductDetails = (key) => {
+            localStorage.setItem('productKey', key);
+            window.location.href = 'produit_details.html';
+        };
+
+        renderProductCards();
+    </script>
+</body>
+</html>
