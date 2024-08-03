@@ -1,6 +1,6 @@
 // Import Firebase modules from CDN
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js';
 import { getDatabase, ref, set, push, onValue, remove, get } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js';
 
 // Your web app's Firebase configuration
@@ -118,3 +118,20 @@ function logout() {
 // Add event listener for logout
 document.getElementById('logout-link').addEventListener('click', logout);
 
+let currentUser;
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        currentUser = user;
+        renderProductCards(user.uid);
+    } else {
+        // Redirect to login if no user is signed in
+        window.location.href = 'connexion.html';
+    }
+});
+
+// function toggleSidebar() {
+//   document.getElementById('sidebar').classList.toggle('open-sidebar');
+// }
+
+// document.querySelector('.navbar-toggler').addEventListener('click', toggleSidebar);

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste de Produits</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="ajout.css">
     <link rel="stylesheet" href="accueil.css">
     <script type="module" src="script.js" defer></script>
@@ -14,6 +15,11 @@
         .product-card.purchased { border-color: green; }
         .card-body { position: relative; }
 
+       
+    .btn-group .btn {
+    margin:0 50px;
+    }
+    
     </style>
 </head>
 <body>
@@ -41,12 +47,10 @@
     </nav>
 
     <div class="sidebar" id="sidebar">
-        <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
-        <a href="#">Accueil</a>
+        <a href="javascript:void(0)" class="close-btn" id="close-btn">&times;</a>        <a href="/accueil.html">Accueil</a>
         <a href="#">Historique</a>
         <a href="/mesplanning.html" id="monplanning">Mes Planning</a>
         <a href="javascript:void(0)" id="logout-link">Deconnexion</a>
-        <a href="#"><i class="fas fa-user"></i></a>
     </div>
 
     <div class="container">
@@ -113,19 +117,53 @@
             const unitPrice = parseFloat(unitPriceInput.value) || 0;
             totalInput.value = quantity * unitPrice;
         };
+  
+        const saveProductToFirebase = (product, key) => {
+  if (key) {
+    const productsRef = ref(database, `products/${product.date}/${key}`);
+    update(productsRef, product)
+      .then(() => {
+        alert("Produit mis à jour avec succès !");
+        renderProductCards();
+      })
+      .catch((error) => {
+        alert("Erreur lors de la mise à jour du produit : " + error.message);
+      });
+  } else {
+    const productsRef = ref(database, `products/${product.date}`);
+    const newProductRef = push(productsRef);
+    set(newProductRef, product)
+      .then(() => {
+        alert("Produit ajouté avec succès !");
+        renderProductCards();
+      })
+      .catch((error) => {
+        alert("Erreur lors de l'ajout du produit : " + error.message);
+      });
+  }
+};
 
-        const saveProductToFirebase = (product) => {
-            const productsRef = ref(database, `products/${product.date}`);
-            const newProductRef = push(productsRef);
-            set(newProductRef, product)
-                .then(() => {
-                    alert("Produit ajouté avec succès !");
-                    renderProductCards();
-                })
-                .catch((error) => {
-                    alert("Erreur lors de l'ajout du produit : " + error.message);
-                });
+const editProduct = (key) => {
+  const productsRef = ref(database, `products/${plannedDate}/${key}`);
+  get(productsRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const product = snapshot.val();
+        productNameInput.value = product.name;
+        quantityInput.value = product.quantity;
+        unitPriceInput.value = product.unitPrice;
+        calculateTotal();
+        const updatedProduct = {
+          name: productNameInput.value,
+          quantity: parseFloat(quantityInput.value),
+          unitPrice: parseFloat(unitPriceInput.value),
+          total: parseFloat(totalInput.value),
+          date: plannedDate
         };
+        saveProductToFirebase(updatedProduct, key);
+      }
+    });
+};
 
         const renderProductCards = () => {
             const productsRef = ref(database, `products/${plannedDate}`);
@@ -145,11 +183,10 @@
                                     <p>Prix Unitaire = ${product.unitPrice} FCFA</p>
                                     <p>Quantité = ${product.quantity}</p>
                                     <p>Total = ${product.total} FCFA</p>
-                                    <p>Date = ${product.date}</p>
-                                    <p><input type="checkbox" class="purchase-checkbox"> Marquer comme déjà acheté</p><br>
+                                    <p><input type="checkbox" class="purchase-checkbox"> Déjà acheté</p><br>
                                     <div class="btn-group">
-                                        <button class="btn btn-warning btn-sm btn-edit"><i class="fas fa-edit"></i> Modifier</button>
-                                        <button class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash"></i> Supprimer</button>
+                                        <button class="btn btn-warning btn-sm btn-edit"><i class="fas fa-edit"></i> </button>
+                                        <button class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash"></i> </button>
                                     </div>
                                 </div>
                             `;
@@ -194,27 +231,22 @@
             totalInput.value = '';
         });
 
-        const editProduct = (key) => {
-            const productsRef = ref(database, `products/${plannedDate}/${key}`);
-            get(productsRef)
-                .then((snapshot) => {
-                    if (snapshot.exists()) {
-                        const product = snapshot.val();
-                        productNameInput.value = product.name;
-                        quantityInput.value = product.quantity;
-                        unitPriceInput.value = product.unitPrice;
-                        calculateTotal();
-                    }
-                });
-        };
         // Sidebar Toggle
         function toggleSidebar() {
-            document.getElementById("sidebar").classList.toggle("open-sidebar");
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar.classList.contains('open-sidebar')) {
+            sidebar.classList.remove('open-sidebar');
+        } else {
+            sidebar.classList.add('open-sidebar');
         }
+        }
+        
         
         document.querySelector('.navbar-toggler').addEventListener('click', function() {
             toggleSidebar();
         }); 
+        
+        document.getElementById('close-btn').addEventListener('click', toggleSidebar);
 
         const deleteProduct = (key) => {
             const productRef = ref(database, `products/${plannedDate}/${key}`);
@@ -232,16 +264,9 @@
 
 
         renderProductCards();
-                    // Burger menu toggle
-                    window.toggleSidebar = () => {
-            console.log("toggleSidebar called");
-            document.getElementById('sidebar').classList.toggle('open-sidebar');
-        };
-          
+         
+
         
-        document.querySelector('.navbar-toggler').addEventListener('click', function() {
-            toggleSidebar();
-        });  
     </script>
 </body>
 </html>

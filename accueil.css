@@ -42,3 +42,73 @@
             }
         
         }
+
+        .product-card.purchased {
+            border: 2px solid green;
+        }
+        .product-card {
+            /* Ajout d'un ombre pour donner une impression de profondeur */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            /* Arrondir les coins de la carte */
+            border-radius: 10px;
+            /* Ajout d'un fond légèrement gris pour donner un peu de texture */
+            background-color: #f7f7f7;
+            /* Ajout d'un padding pour espacer le contenu de la carte */
+            padding: 20px;
+          }
+          
+          .product-card:hover {
+            /* Ajout d'un effet de survol pour attirer l'attention */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px);
+          }
+          
+          .product-card.purchased {
+            /* Ajout d'une bordure verte pour indiquer que le produit est déjà acheté */
+            border: 2px solid green;
+            /* Ajout d'un fond légèrement vert pour donner un peu de couleur */
+            background-color: #c6efce;
+          }
+          
+          .product-card .card-body {
+            /* Ajout d'un padding pour espacer le contenu de la carte */
+            padding: 20px;
+          }
+          
+          .product-card .card-body p {
+            /* Ajout d'un margin pour espacer les paragraphes */
+            margin-bottom: 10px;
+          }
+          
+          .product-card .btn-group {
+            /* Ajout d'un margin pour espacer les boutons */
+            margin-top: 20px;
+          }
+          
+          .product-card .btn-edit, .product-card .btn-delete {
+            /* Ajout d'un style pour les boutons */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+          }
+          
+          .product-card .btn-edit {
+            /* Ajout d'un style pour le bouton de modification */
+            background-color: #ffc107;
+            color: #ffffff;
+          }
+          
+          .product-card .btn-delete {
+            /* Ajout d'un style pour le bouton de suppression */
+            background-color: #dc3545;
+            color: #ffffff;
+          }
+          
+          .product-card .btn-edit:hover, .product-card .btn-delete:hover {
+            /* Ajout d'un effet de survol pour les boutons */
+            opacity: 0.8;
+          }
+
+          

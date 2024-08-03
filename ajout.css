@@ -37,43 +37,46 @@ h3 {
     margin: 0;
 }
 
-.sidebar {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #3949AB;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-}
-
-.sidebar-content {
-    padding: 8px 32px;
-}
-
-.sidebar .nav-link {
-    color: white;
-    font-size: 25px;
-    display: block;
-    transition: 0.3s;
-}
-
-.sidebar .nav-link:hover {
-    color: #f1f1f1;
-}
-
-@media (max-width: 767.98px) {
-    .container-fluid {
-        padding: 0 15px;
-    }
+        /* Add some basic styles for the sidebar */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #ffffff;
+            padding-top: 60px;
+            transition: 0.3s;
+            z-index: 1000;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bolder;
+            color: #3949AB;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            color: #000000;
+            background-color: #f1f1f1;
+        }
+        .sidebar .close-btn {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            font-size: 36px;
+        }
+        .open-sidebar {
+            left: 0;
+            
+        }
     
-    .navbar {
-        display: none;
-    }
-    
+     @media (min-width: 769px) {
+ .sidebar {
+   display: none;
+    } 
     .form-control {
         width: 100%;
     }

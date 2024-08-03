@@ -8,6 +8,64 @@
     <script type="module" src="script.js" defer></script>
     <link rel="stylesheet" href="accueil.css">
 </head>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.table-container {
+  margin-top: 5rem;
+  padding: 2rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  text-align: left;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+td {
+  background-color: #fff;
+}
+
+td button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+td button:hover {
+  background-color: #444;
+}
+.table-container {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th {
+  font-weight: bold;
+}
+
+td {
+  font-size: 1.5rem;
+}
+
+button {
+  font-size: 1.2rem;
+}
+
+</style>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +91,7 @@
 
     <div class="sidebar" id="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
-        <a href="#">Accueil</a>
+        <a href="/accueil.html">Accueil</a>
         <a href="#">Historique</a>
         <a href="javascript:void(0)" id="monplanning">Mes Planning</a>
         <a href="javascript:void(0)" id="logout-link">Deconnexion</a>
@@ -87,8 +145,7 @@
                         row.innerHTML = `
                             <td>${date}</td>
                             <td>
-                                <button class="btn btn-primary btn-sm ml-3" onclick="viewPlanning('${date}')">Voir</button>
-                            </td>
+  <button class="btn btn-primary btn-lg mx-auto d-block" onclick="viewPlanning('${date}')">Voir</button>                            </td>
                         `;
                         planningTableBody.appendChild(row);
                     });
@@ -96,10 +153,7 @@
             });
         };
 
-        // const viewPlanning = (date) => {
-        //     localStorage.setItem('plannedDate', date);
-        //     window.location.href = 'Produit.html';
-        // };
+    
         window.viewPlanning = (date) => {
             console.log("viewPlanning called with date:", date);
             localStorage.setItem('plannedDate', date);

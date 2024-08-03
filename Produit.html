@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produits</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="accueil.css">
+
     <script type="module" src="script.js" defer></script>
 
 </head>
+<style>
+    .btn-group .btn {
+    margin:0 50px;
+}
+</style>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +41,7 @@
 
     <div class="sidebar" id="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
-        <a href="#">Accueil</a>
+        <a href="/accueil.html">Accueil</a>
         <a href="#">Historique</a>
         <a href="/mesplanning.html" id="monplanning">Mes Planning</a>
         <a href="javascript:void(0)" id="logout-link">Deconnexion</a>
@@ -86,11 +93,10 @@
                                     <p>Prix Unitaire = ${product.unitPrice} FCFA</p>
                                     <p>Quantité = ${product.quantity}</p>
                                     <p>Total = ${product.total} FCFA</p>
-                                    <p>Date = ${product.date}</p>
-                                    <p><input type="checkbox" class="purchase-checkbox"> Marquer comme déjà acheté</p>
+                                    <p><input type="checkbox" class="purchase-checkbox"> Déjà acheté</p><br>
                                     <div class="btn-group">  
-                                        <button class="btn btn-warning btn-sm btn-edit"><i class="fas fa-edit"></i> Modifier</button>
-                                        <button class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash"></i> Supprimer</button>
+                                        <button class="btn btn-warning btn-sm btn-edit"><i class="fas fa-edit"></i> </button>
+                                        <button class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash"></i> </button>
                                      </div>
                                 </div>
                             `;
