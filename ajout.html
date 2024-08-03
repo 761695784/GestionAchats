@@ -180,16 +180,15 @@ const editProduct = (key) => {
                                     <p>Prix Unitaire = ${product.unitPrice} FCFA</p>
                                     <p>Quantité = ${product.quantity}</p>
                                     <p>Total = ${product.total} FCFA</p>
-                                    <p><input type="checkbox" class="purchase-checkbox"> Déjà acheté</p><br>
                                     <div class="btn-group">
                                         <button class="btn btn-warning btn-sm btn-edit"><i class="fas fa-edit"></i> </button>
                                         <button class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash"></i> </button>
                                     </div>
                                 </div>
                             `;
-                            productCard.querySelector('.purchase-checkbox').addEventListener('change', function() {
-                                productCard.classList.toggle('purchased', this.checked);
-                            });
+                            // productCard.querySelector('.purchase-checkbox').addEventListener('change', function() {
+                            //     productCard.classList.toggle('purchased', this.checked);
+                            // });
                             productCard.querySelector('.btn-edit').addEventListener('click', function() {
                                 editProduct(key);
                             });
@@ -257,7 +256,7 @@ const editProduct = (key) => {
                 });
         };
 
-        document.getElementById('plannedDateTime').textContent = `Liste du ${plannedDate}`;
+        document.getElementById('plannedDateTime').textContent = `Courses du ${plannedDate}`;
 
 
         renderProductCards();
