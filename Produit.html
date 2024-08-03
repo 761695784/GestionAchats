@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,100 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="accueil.css">
-
+    <link rel="stylesheet" href="Produit.css">
     <script type="module" src="script.js" defer></script>
-
 </head>
 <style>
-    .btn-group .btn {
-    margin:0 50px;
+/* Sidebar styles */
+#sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px; /* Initialement caché */
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+    z-index: 1000; /* Assure que le sidebar est au-dessus des autres éléments */
 }
+
+#sidebar.open-sidebar {
+    left: 0;
+}
+
+#sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #3949AB;
+    display: block;
+    transition: 0.3s;
+    font-weight: bolder;
+}
+
+#sidebar a:hover {
+    color: #000000;
+}
+
+/* Additional styles for card */
+.cartes-container {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Assure que les cartes sont au-dessus du contenu lors du défilement */
+    background-color: #fff; /* Ajouter un fond blanc pour éviter les problèmes de visibilité */
+    padding: 10px; /* Ajouter un peu de padding pour séparer les cartes du bord */
+    margin-bottom: 20px;
+    z-index: 1;
+}
+
+.carte {
+    flex: 0 0 100%;
+    display: none;
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+    font-size: 1.2em;
+    border-radius: 10px;
+}
+
+#carte-achetes {
+    background-color: green;
+}
+
+#carte-non-achetes {
+    background-color: rgb(0, 0, 0);
+}
+
+#carte-tous-produits {
+    background-color: rgba(219, 219, 36, 0.74);
+    color: #000;
+}
+
+.carte.show {
+    display: block;
+    animation: slide-in 1s forwards;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.btn-group .btn {
+    margin: 0 50px;
+}
+
 </style>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -32,21 +115,32 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/mesplanning.html">Mes Planning</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
-                </li>
             </ul>
         </div>
     </nav>
 
-    <div class="sidebar" id="sidebar">
-        <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
-        <a href="/accueil.html">Accueil</a>
+    <div id="sidebar">
+        <a href="#">Accueil</a>
         <a href="#">Historique</a>
-        <a href="/mesplanning.html" id="monplanning">Mes Planning</a>
+        <a href="/mesplanning.html">Mes Planning</a>
         <a href="javascript:void(0)" id="logout-link">Deconnexion</a>
-        <a href="#"><i class="fas fa-user"></i></a>
     </div>
+
+    <div class="cartes-container" id="cartes-container">
+        <div class="carte" id="carte-achetes">
+            <h4>Somme totale des produits achetés</h4>
+            <p id="somme-achetes">0 FCFA</p>
+        </div>
+        <div class="carte" id="carte-non-achetes">
+            <h4>Somme totale des produits non achetés</h4>
+            <p id="somme-non-achetes">0 FCFA</p>
+        </div>
+        <div class="carte" id="carte-tous-produits">
+            <h4>Somme totale de tous les produits</h4>
+            <p id="somme-tous-produits">0 FCFA</p>
+        </div>
+    </div>
+
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
@@ -93,24 +187,26 @@
                                     <p>Prix Unitaire = ${product.unitPrice} FCFA</p>
                                     <p>Quantité = ${product.quantity}</p>
                                     <p>Total = ${product.total} FCFA</p>
-                                    <p><input type="checkbox" class="purchase-checkbox"> Déjà acheté</p><br>
+                                    <p><input type="checkbox" class="purchase-checkbox" ${product.purchased ? 'checked' : ''}> Déjà acheté</p><br>
                                     <div class="btn-group">  
                                         <button class="btn btn-warning btn-sm btn-edit"><i class="fas fa-edit"></i> </button>
                                         <button class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash"></i> </button>
                                      </div>
                                 </div>
                             `;
-                            productCard.querySelector('.purchase-checkbox').addEventListener('change', function() {
+                            productCard.querySelector('.purchase-checkbox').addEventListener('change', function () {
                                 productCard.classList.toggle('purchased', this.checked);
+                                updateProductPurchaseStatus(key, this.checked);
                             });
-                            productCard.querySelector('.btn-edit').addEventListener('click', function() {
+                            productCard.querySelector('.btn-edit').addEventListener('click', function () {
                                 editProduct(key);
                             });
-                            productCard.querySelector('.btn-delete').addEventListener('click', function() {
+                            productCard.querySelector('.btn-delete').addEventListener('click', function () {
                                 deleteProduct(key);
                             });
                             productCards.appendChild(productCard);
                         });
+                        updateSommes(snapshot);
                     }
                 });
         };
@@ -140,23 +236,84 @@
                 });
         };
 
+        const updateProductPurchaseStatus = (key, purchased) => {
+            const productRef = ref(database, `products/${plannedDate}/${key}`);
+            get(productRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const product = snapshot.val();
+                    product.purchased = purchased;
+                    product.total = product.unitPrice * product.quantity;
+                    productRef.set(product);
+                }
+            }).then(() => {
+                const productsRef = ref(database, `products/${plannedDate}`);
+                get(productsRef).then((snapshot) => {
+                    updateSommes(snapshot);
+                });
+            });
+        };
+
+        const cartesContainer = document.getElementById('cartes-container');
+        const carteAchetes = document.getElementById('carte-achetes');
+        const carteNonAchetes = document.getElementById('carte-non-achetes');
+        const carteTousProduits = document.getElementById('carte-tous-produits');
+
+        let sommeAchetes = 0;
+        let sommeNonAchetes = 0;
+        let sommeTousProduits = 0;
+
+        // Mettre à jour les sommes
+        function updateSommes(snapshot) {
+            sommeAchetes = 0;
+            sommeNonAchetes = 0;
+            sommeTousProduits = 0;
+
+            // Calculer les sommes
+            const products = snapshot.val();
+            Object.keys(products).forEach(key => {
+                const product = products[key];
+                if (product.purchased) {
+                    sommeAchetes += product.total;
+                } else {
+                    sommeNonAchetes += product.total;
+                }
+                sommeTousProduits += product.total;
+            });
+
+            // Mettre à jour les cartes
+            carteAchetes.querySelector('p').textContent = `${sommeAchetes} FCFA`;
+            carteNonAchetes.querySelector('p').textContent = `${sommeNonAchetes} FCFA`;
+            carteTousProduits.querySelector('p').textContent = `${sommeTousProduits} FCFA`;
+        }
+
+        // Animer les cartes
+        function animateCartes() {
+            const cartes = cartesContainer.children;
+            let currentCarte = 0;
+
+            setInterval(() => {
+                cartes[currentCarte].classList.remove('show');
+                currentCarte = (currentCarte + 1) % cartes.length;
+                cartes[currentCarte].classList.add('show');
+            }, 2000);
+        }
+
+        animateCartes();
+
         document.getElementById('plannedDateTime').textContent = `Produits pour la date ${plannedDate}`;
 
         renderProductCards();
-                 // Burger menu toggle
-                 window.toggleSidebar = () => {
-            console.log("toggleSidebar called");
-            document.getElementById('sidebar').classList.toggle('open-sidebar');
-        };
-          
+
         // Sidebar Toggle
         function toggleSidebar() {
             document.getElementById("sidebar").classList.toggle("open-sidebar");
         }
-        
-        document.querySelector('.navbar-toggler').addEventListener('click', function() {
+
+        document.querySelector('.navbar-toggler').addEventListener('click', function () {
             toggleSidebar();
-        });  
+        });
+
     </script>
 </body>
+
 </html>
