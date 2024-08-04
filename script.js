@@ -130,8 +130,3 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-// function toggleSidebar() {
-//   document.getElementById('sidebar').classList.toggle('open-sidebar');
-// }
-
-// document.querySelector('.navbar-toggler').addEventListener('click', toggleSidebar);
