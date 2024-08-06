@@ -6,7 +6,6 @@
     <title>Planifier un Shopping</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="accueil.css">
-    
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -24,9 +23,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="mesplanning.html">Mes Planning</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -37,7 +33,6 @@
         <a href="#">Historique</a>
         <a href="/mesplanning.html" id="monplanning">Mes Planning</a>
         <a href="javascript:void(0)" id="logout-link">Deconnexion</a>
-        <a href="#"><i class="fas fa-user"></i></a>
     </div>
 
     <div class="container-fluid">
@@ -56,7 +51,7 @@
                 <form id="planningForm">
                     <div class="form-group">
                         <label for="datePicker">Choisir une date</label>
-                        <input type="date" class="form-control" id="datePicker">
+                        <input type="date" class="form-control" id="datePicker" required min="2023-10-01">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mb-3">Valider</button>
                 </form>
@@ -68,38 +63,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-    const planningForm = document.getElementById('planningForm');
-
-    planningForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Empêche le rechargement de la page
-
-        const date = document.getElementById('datePicker').value;
-        // const time = document.getElementById('timePicker').value;
-
-        if (date )
-        // && time {
-            // Enregistrer les informations dans localStorage ou dans la base de données Firebase
-            localStorage.setItem('plannedDate', date);
-            // localStorage.setItem('plannedTime', time);
-
-            // Rediriger vers la page ajout.html
-            window.location.href = 'ajout.html';
-    });
-});
-
-        
-        // Sidebar Toggle
-        function toggleSidebar() {
-            document.getElementById("sidebar").classList.toggle("open-sidebar");
-        }
-        
-        document.querySelector('.navbar-toggler').addEventListener('click', function() {
-            toggleSidebar();
-        });  
-
-    </script>
+    <script type="module" src="accueil.js"> </script>
     <script type="module" src="script.js"></script>
 </body>
 </html>

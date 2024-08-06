@@ -6,146 +6,8 @@
     <title>Mes Plannings</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <script type="module" src="script.js" defer></script>
     <link rel="stylesheet" href="accueil.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        h3 {
-            font-size: 1.75rem;
-            font-weight: bold;
-            text-align: center;
-        }
-        .table-container {
-            margin-top: 5rem;
-            padding: 2rem;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 1rem;
-            text-align: left;
-        }
-        th {
-            background-color: #f0f0f0;
-        }
-        td {
-            background-color: #fff;
-        }
-        td button {
-            background-color: #333;
-            color: #fff;
-            border: none;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-        }
-        td button:hover {
-            background-color: #444;
-        }
-
-     /*   .btn-group {
-            display: flex;
-            gap: 10px;  Adjust the space between buttons
-        } */
-
-        .btn-group .btn {
-            display: flex;
-            align-items: center;
-           /* justify-content: center;
-            padding: 0.5rem; */
-        }
-        .table-container {
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        th {
-            font-weight: bold;
-        }
-        td {
-            font-size: 1.5rem;
-        }
-        button {
-            font-size: 1.2rem;
-        }
-        .cartes-container {
-            display: flex;
-            overflow-x: hidden; /* Hide scrollbar */
-            scroll-behavior: smooth;
-            padding: 10px;
-            background-color: #fff;
-            margin-bottom: 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        /* Hide scrollbar for webkit browsers */
-        .cartes-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Hide scrollbar for other browsers */
-        .cartes-container {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-
-        .carte {
-            flex: 0 0 100%;
-            text-align: center;
-            padding: 20px;
-            color: #fff;
-            font-size: 1.2em;
-            border-radius: 10px;
-            margin-right: 10px;
-            min-width: 300px;
-        }
-        #carte-achetes {
-            background-color: green;
-        }
-        #carte-non-achetes {
-            background-color: rgb(0, 0, 0);
-        }
-        #carte-tous-produits {
-            background-color: rgba(219, 219, 36, 0.74);
-            color: #000;
-        }
-        .btn-group .btn {
-            margin: 0 50px;
-        }
-        #sidebar {
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            left: -250px; /* Initially hidden */
-            background-color: rgb(255, 255, 255);
-            overflow-x: hidden;
-            transition: 0.3s;
-            padding-top: 60px;
-            z-index: 1001; /* Ensure sidebar is above other elements */
-        }
-        #sidebar.open-sidebar {
-            left: 0;
-        }
-        #sidebar a {
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 18px;
-            color: #3949AB;
-            display: block;
-            transition: 0.3s;
-            font-weight: bolder;
-        }
-        #sidebar a:hover {
-            color: #000000;
-        }
-    </style>
+    <link rel="stylesheet" href="mesplanning.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -155,15 +17,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Accueil</a>
+                    <a class="nav-link" href="/accueil.html">Accueil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Historique</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Mes Planning</a>
-                </li>
-                <li class="nav-item">
+                    <a class="nav-link" href="/mesplanning.html">Mes Planning</a>
                 </li>
             </ul>
         </div>
@@ -209,138 +69,8 @@
         </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js';
-        import { getDatabase, ref, onValue, remove } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js';
+    <script type="module" src="script.js" defer></script>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBHPaYRAkOE1VTo9hv3tkseUFnGfJkvtUo",
-            authDomain: "gestionachats-1112.firebaseapp.com",
-            projectId: "gestionachats-1112",
-            storageBucket: "gestionachats-1112.appspot.com",
-            messagingSenderId: "1014952416832",
-            appId: "1:1014952416832:web:33fdda900d4ff03e9db1a5"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-
-        const planningTableBody = document.getElementById('planningTableBody');
-        const cartesContainer = document.getElementById('cartes-container');
-        const carteAchetes = document.getElementById('carte-achetes');
-        const carteNonAchetes = document.getElementById('carte-non-achetes');
-        const carteTousProduits = document.getElementById('carte-tous-produits');
-
-        let sommeAchetes = 0;
-        let sommeNonAchetes = 0;
-        let sommeTousProduits = 0;
-
-        window.fetchPlanningsFromFirebase = () => {
-            const productsRef = ref(database, 'products');
-            onValue(productsRef, (snapshot) => {
-                const plannings = snapshot.val();
-                planningTableBody.innerHTML = '';
-                if (plannings) {
-                    Object.keys(plannings).forEach(date => {
-                        const products = plannings[date];
-                        const productsList = Object.keys(products).map(key => products[key].name).join(', ');
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td>${date}</td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <button class="btn btn-primary" onclick="viewPlanning('${date}')"><i class="fas fa-eye" id="viewProducts" title="Voir tous les produits"></i></button>
-                                    <button class="btn btn-danger" onclick="deleteDate('${date}')"><i class="fas fa-trash" title="Supprimer la date"></i></button>
-                                </div>
-                            </td>
-                        `;
-                        planningTableBody.appendChild(row);
-
-                        // Calculer les sommes pour cette date
-                        Object.keys(products).forEach(key => {
-                            const product = products[key];
-                            console.log('Product:', product); // Debug log
-                            if (product.purchased) {
-                                sommeAchetes += product.total;
-                            } else {
-                                sommeNonAchetes += product.total;
-                            }
-                            sommeTousProduits += product.total;
-                        });
-                    });
-
-                    // Mettre à jour les cartes
-                    carteAchetes.querySelector('p').textContent = `${sommeAchetes} FCFA`;
-                    carteNonAchetes.querySelector('p').textContent = `${sommeNonAchetes} FCFA`;
-                    carteTousProduits.querySelector('p').textContent = `${sommeTousProduits} FCFA`;
-
-                    console.log('Somme achetés:', sommeAchetes); // Debug log
-                    console.log('Somme non achetés:', sommeNonAchetes); // Debug log
-                    console.log('Somme tous produits:', sommeTousProduits); // Debug log
-
-                    // Afficher les cartes
-                    carteAchetes.style.display = 'block';
-                    carteNonAchetes.style.display = 'block';
-                    carteTousProduits.style.display = 'block';
-                }
-
-                // Animer les cartes
-                animateCartes();
-            });
-        };
-
-        window.deleteDate = (date) => {
-            console.log(`Trying to delete date: ${date}`); // Debug log
-            const productsRef = ref(database, `products/${date}`);
-            remove(productsRef)
-                .then(() => {
-                    console.log(`Date ${date} supprimée avec succès.`);
-                    // Mettre à jour le DOM
-                    fetchPlanningsFromFirebase();
-                })
-                .catch((error) => {
-                    console.error("Erreur lors de la suppression de la date:", error);
-                });
-        };
-
-        const animateCartes = () => {
-            const cartesContainer = document.getElementById('cartes-container');
-            const cartes = cartesContainer.children;
-            let currentIndex = 0;
-
-            setInterval(() => {
-                const nextIndex = (currentIndex + 1) % cartes.length;
-                const scrollAmount = cartes[nextIndex].offsetLeft;
-                cartesContainer.scrollTo({
-                    left: scrollAmount,
-                    behavior: 'smooth'
-                });
-                currentIndex = nextIndex;
-            }, 3000); // Change card every 3 seconds
-        };
-
-        window.viewPlanning = (date) => {
-            console.log("viewPlanning called with date:", date);
-            localStorage.setItem('plannedDate', date);
-            window.location.href = 'Produit.html';
-        };
-
-        fetchPlanningsFromFirebase();
-
-        // Sidebar Toggle
-        function toggleSidebar() {
-            document.getElementById("sidebar").classList.toggle("open-sidebar");
-            document.getElementById("cartes-container").classList.toggle("hidden");
-        }
-
-        document.querySelector('.navbar-toggler').addEventListener('click', function () {
-            toggleSidebar();
-        });
-
-        // Call animateCartes when DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', (event) => {
-            animateCartes();
-        });
-    </script>
+    <script type="module" src="mesplanning.js"></script>
 </body>
 </html>
