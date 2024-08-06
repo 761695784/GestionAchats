@@ -37,3 +37,4 @@ function toggleSidebar() {
 document.querySelector('.navbar-toggler').addEventListener('click', function() {
     toggleSidebar();
 });
+document.getElementById('close-btn').addEventListener('click', toggleSidebar);

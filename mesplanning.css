@@ -95,7 +95,7 @@ button {
     color: white;
 }
 #carte-tous-produits {
-    background-color: rgba(219, 219, 36, 0.74);
+    background-color: rgb(250, 184, 3);
     color: #000;
     font-weight: bold;
 
@@ -129,4 +129,11 @@ button {
 }
 #sidebar a:hover {
     color: #000000;
+}
+
+.sidebar .close-btn {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    font-size: 36px;
 }

@@ -114,9 +114,9 @@
             }
             
             #alert.alert-success {
-                background-color: #dff0d8;
+                background-color: #6bda40;
                 border-color: #8bc34a;
-                color: #3e8e41;
+                color: #c5cec5;
             }
             
             #alert.alert-danger {

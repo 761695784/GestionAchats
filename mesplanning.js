@@ -139,3 +139,5 @@ document.querySelector('.navbar-toggler').addEventListener('click', function () 
 document.addEventListener('DOMContentLoaded', (event) => {
     animateCartes();
 });
+
+document.getElementById('close-btn').addEventListener('click', toggleSidebar);
