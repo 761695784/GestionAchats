@@ -27,7 +27,7 @@ function validateFields() {
   if (validate_field(name) && validate_field(email) && validate_field(password) && validate_email(email) && validate_password(password)) {
     register(name, email, password);
   } else {
-    alert('Please fill all fields correctly');
+    alert('Veuiller Remplir correctement toutes les champs');
   }
 }
 
@@ -42,8 +42,8 @@ function register(name, email, password) {
       };
       set(ref(database, 'users/' + user.uid), user_data)
         .then(() => {
-          alert("User account created successfully!");
-          // window.location.href = "index.html";
+          alert("Bravo ! vous avez créé votre compte avec succès, Procedez à vos planifications ");
+          window.location.href = "accueil.html";
         });
     })
     .catch((error) => {
@@ -63,7 +63,7 @@ function login() {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        alert('Login successful!');
+        alert('Connexion Réussie');
         // Redirect to the main page or dashboard
          window.location.href = 'accueil.html';
       })
@@ -73,7 +73,7 @@ function login() {
         alert(errorMessage);
       });
   } else {
-    alert('Please fill all fields correctly');
+    alert('Veuiller Remplir correctement les champs');
   }
 }
 
@@ -109,7 +109,7 @@ function redirectToSignup() {
 // Logout function
 function logout() {
   signOut(auth).then(() => {
-    alert('Logout successful!');
+    alert('Déconnexion Réussie');
     window.location.href = 'connexion.html'; // Redirect to the login page
   }).catch((error) => {
     alert(error.message);

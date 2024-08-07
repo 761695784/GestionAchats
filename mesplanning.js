@@ -30,7 +30,7 @@ onAuthStateChanged(auth, (user) => {
         const userId = user.uid;
         fetchPlanningsFromFirebase(userId);
     } else {
-        console.log("User is not authenticated");
+        console.log("Vous ne vous etes pas authentifié");
     }
 });
 
@@ -94,7 +94,9 @@ window.deleteDate = (date) => {
     const productsRef = ref(database, `users/${userId}/products/${date}`);
     remove(productsRef)
         .then(() => {
-            console.log(`Date ${date} supprimée avec succès.`);
+            // console.log(`Date ${date} supprimée avec succès.`);
+            alert(`Date ${date} supprimée avec succès.`);
+
             // Mettre à jour le DOM
             fetchPlanningsFromFirebase(userId);
         })

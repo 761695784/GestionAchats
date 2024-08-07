@@ -23,7 +23,7 @@ onAuthStateChanged(auth, (user) => {
         const userId = user.uid;
         renderProductCards(userId);
     } else {
-        console.log("User is not authenticated");
+        console.log("Vous n'etes pas authentifié");
     }
 });
 
